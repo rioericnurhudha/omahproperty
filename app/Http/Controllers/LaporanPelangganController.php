@@ -11,7 +11,9 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanPelangganController extends Controller
 {
-    public function searchLaporanPelanggan(Request $request)
+   
+
+    public function laporanpelanggan(Request $request)
     {
         $search = $request->get('search');
         if ($search) {
@@ -23,14 +25,7 @@ class LaporanPelangganController extends Controller
         $laporan = $this->generateLaporan($daftar_pelanggan);
 
         return view('laporanpelanggan', compact('laporan', 'search', 'request'));
-    }
-
-    public function laporanpelanggan()
-    {
-        $daftar_pelanggan = DaftarPelanggan::all();
-        $laporan = $this->generateLaporan($daftar_pelanggan);
-
-        return view('laporanpelanggan', compact('laporan'));
+    
     }
 
     private function generateLaporan($daftar_pelanggan)
