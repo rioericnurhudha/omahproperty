@@ -231,20 +231,24 @@
 <script src="{{ asset ('lte/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset ('lte/dist/js/pages/dashboard2.js')}}"></script>
+
+@if ($message = Session::get('success'))
 <script>
-  @if ($message = Session::get('success'))
-  Swal.fire({
-    icon: 'success',
-    title: 'Success!',
-    text: '{{ $message }}'
-  });
+    Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ Session::get('success') }}'
+        });
+</script>
 @endif
-  @if ($message = Session::get('failed'))
-  Swal.fire({
-    icon: 'error',
-    title: 'gagal!',
-    text: '{{ $message }}'
-  });
+@if ($message = Session::get('failed'))
+<script>
+   Swal.fire({
+            icon: 'error',
+            title: 'Gagal!',
+            text: '{{ Session::get('failed') }}'
+        });
+</script>
 @endif
 
 @yield('scripts')

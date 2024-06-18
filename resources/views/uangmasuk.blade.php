@@ -66,7 +66,7 @@
                                     <td>{{format_rupiah( $row->jumlah_pembayaran )}}</td>
                                     <td>
                                         <a href="/uangmasuktampil/{{ $row->id }}" class="btn text-white text-bold btn-warning">Edit</a>
-                                        <a href="/uangmasukdelete/{{ $row->id }}" class="btn text-bold btn-danger">Hapus</a>
+                                        <button class="btn btn-danger" onclick="deleteUangMasuk({{ $row->id }})">Hapus</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -89,4 +89,28 @@
         </div>
 
     </div>
+    @include('sweetalert::alert')
+
+    <!-- Script untuk SweetAlert2 dengan ikon -->
+    <script>
+        function deleteUangMasuk(id) {
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#aaa',
+                confirmButtonText: '<i class="fa fa-trash-alt"></i> Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect atau hapus data
+                    window.location = '/uangmasukdelete/' + id;
+                }
+            });
+        }
+    </script>
+</div>
+
 @endsection

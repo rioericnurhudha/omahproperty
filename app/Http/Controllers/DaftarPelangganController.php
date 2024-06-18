@@ -76,20 +76,18 @@ class DaftarPelangganController extends Controller
     
         if ($existingCount > 0) {
             // Tampilkan sweet alert untuk gagal karena nama pelanggan sudah ada
-            Alert::error('Gagal', 'Data gagal diperbarui karena nama pelanggan sudah ada.');
-            return redirect()->route('daftarpelanggantampil', ['id' => $data->id]);
+            return redirect()->route('daftarpelanggantampil', ['id' => $data->id])->with('failed',' Gagal karena nama pelanggan sudah ada');
         }
     
         // Update data pelanggan
         $data->update($validate);
     
         // Tampilkan sweet alert untuk sukses
-        Alert::success('success', 'Data berhasil diperbarui!');
     
         // Redirect ke halaman daftar pelanggan
-        return redirect()->route('daftarpelanggan');
+        return redirect()->route('daftarpelanggan')->with('success','Data Berhasil Diperbarui');
     }
-    
+      
     public function daftarpelanggandelete($id){
         $data = DaftarPelanggan::find($id);
         $data->delete();

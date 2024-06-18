@@ -64,7 +64,8 @@
                         <a href="/uangmasuk/{{$row->id}}" class="btn text-bold btn-primary">Detail</a>
 
                           <a href="/proyektampil/{{$row->id}}" class="btn text-bold text-white btn-warning">Edit</a>
-                          <a href="/proyekdelete/{{$row->id}}" class="btn text-bold btn-danger">Hapus</a>
+                          <button class="btn btn-danger" onclick="deleteProyek({{ $row->id }})">Hapus</button>
+
                       </td>
                     </tr>
                     @endforeach
@@ -76,4 +77,28 @@
     </div>
 
 </div>
+@include('sweetalert::alert')
+
+<!-- Script untuk SweetAlert2 dengan ikon -->
+<script>
+    function deleteProyek(id) {
+        Swal.fire({
+            title: 'Anda yakin?',
+            text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#aaa',
+            confirmButtonText: '<i class="fa fa-trash-alt"></i> Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirect atau hapus data
+                window.location = '/proyekdelete/' + id;
+            }
+        });
+    }
+</script>
+</div>
+
 @endsection
