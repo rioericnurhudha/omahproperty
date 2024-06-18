@@ -38,11 +38,14 @@ class DaftarPelangganController extends Controller
     }
     public function daftarpelangganinsert(Request $request){
         $validate = $request->validate([
-            'nama_pelanggan'   => 'required',
+            'nama_pelanggan'   => 'required|unique:daftar_pelanggan,nama_pelanggan',
             'no_hp' => 'required',
             'alamat' => 'required',
             
         ]);
+        if (DaftarPelanggan::where('nama_pelanggan', $validate['nama_pelanggan'])->count() == 1) {
+            return redirect()->route('daftarpelanggantambah')->with('failed');
+        }
         DaftarPelanggan::create($validate);
 
         return redirect()->route('daftarpelanggan')->with('success', 'data berhasil ditambahkan!');

@@ -55,14 +55,14 @@
                           $no = 1;
                       @endphp
                       @foreach ($laporan as $data)
-                      <tr>
+                      <tr class="text-center">
                         <td>{{ $no++ }}</td>
                         <td>{{ $data['nama_pelanggan'] }}</td>
                         <td>{{ $data['total_proyek'] }}</td>
                         <td>{{ $data['harga_proyek'] }}</td>
                         <td>{{ $data['total_uang_masuk'] }}</td>
                         <td> {{ $data['total_uang_keluar'] }}</td>
-                        <td>{{ $data['angsuran'] }}</td>
+                        <td>{{ $data['angsuran']}} x</td>
                         <td>{{ $data['sisa_angsuran'] }}</td>
                         <td>{{ $data['profit'] }}</td>
                      

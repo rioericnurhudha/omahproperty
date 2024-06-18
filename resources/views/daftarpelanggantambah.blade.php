@@ -50,4 +50,11 @@
       </div>
     </div>
 </div>
+@if(Session::has('failed'))
+Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: '{{ Session::get('failed') }}',
+});
+@endif
 @endsection
