@@ -63,7 +63,7 @@ Route::get('/uangmasukdelete/{id}', [UangMasukController::class, 'uangmasukdelet
 
 // ROUTE UANG KELUAR
 Route::get('/uangkeluar/{id_proyek}', [UangKeluarController::class, 'uangkeluar'])->name('uangkeluar');
-Route::get('/uangkeluartambah/{id_uang_masuk}', [UangKeluarController::class, 'uangkeluartambah'])->name('uangkeluartambah');
+Route::get('/uangkeluartambah/{id_proyek}', [UangKeluarController::class, 'uangkeluartambah'])->name('uangkeluartambah');
 Route::post('/uangkeluarinsert', [UangKeluarController::class, 'uangkeluarinsert'])->name('uangkeluarinsert');
 Route::get('/uangkeluartampil/{id}', [UangKeluarController::class, 'uangkeluartampil'])->name('uangkeluartampil');
 Route::post('/uangkeluarupdate/{id}', [UangKeluarController::class, 'uangkeluarupdate'])->name('uangkeluarupdate');
