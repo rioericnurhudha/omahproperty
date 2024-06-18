@@ -13,6 +13,10 @@
   <link rel="stylesheet" href="{{ asset('lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css')}}">
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -208,15 +212,10 @@
 
 </div>
 <!-- ./wrapper -->
-
 <!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
 <script src="{{ asset ('lte/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap -->
 <script src="{{ asset ('lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- overlayScrollbars -->
 <script src="{{ asset ('lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
-<!-- AdminLTE App -->
 <script src="{{ asset ('lte/dist/js/adminlte.js')}}"></script>
 
 <!-- PAGE PLUGINS -->
@@ -232,6 +231,19 @@
 <script src="{{ asset ('lte/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset ('lte/dist/js/pages/dashboard2.js')}}"></script>
+@if(session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    </script>
+@endif
+@yield('content')
 
+@yield('scripts')
 </body>
 </html>
