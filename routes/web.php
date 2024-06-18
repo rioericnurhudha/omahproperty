@@ -16,10 +16,10 @@ use App\Http\Controllers\LaporanKantorController;
 
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/registerProccess', [LoginController::class, 'registerProccess'])->name('registerProccess');
-
-Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

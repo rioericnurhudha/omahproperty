@@ -30,7 +30,7 @@ class LoginController extends Controller
                 // Mencoba otentikasi menggunakan guard 'admin'
                 if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
                     // Jika berhasil, redirect ke dashboard atau halaman admin
-                    return redirect()->intended('/');
+                    return redirect()->intended('/dashboard');
                 }
             }
         }
@@ -41,8 +41,8 @@ class LoginController extends Controller
     
 
     public function logout(){
-        Auth::logout();
-        return redirect()->route('login')->with('success', 'Anda berhasil keluar!');
+        Auth::guard('admin')->logout();
+                return redirect()->route('login')->with('success', 'Anda berhasil keluar!');
     }
 
     public function register(){
