@@ -14,6 +14,20 @@
       <div class="container">
           <h1 class="mb-4">Laporan Pelanggan</h1>
           <a href="{{ route('laporanpelanggan.export') }}" class="btn text-bold btn-success mb-2">Export To Excel</a>
+          <div class="card-header mb-2">
+            <div class="card-tools">
+              <form action="{{route('searchLaporanPelanggan')}}" method="GET">
+                <div class="input-group input-group-sm" style="width: 200px; ">
+                  <input type="text" name="search" class="form-control float-right" placeholder="Search" value="{{$request->get('search')}}">
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
           <div class="row">
               {{-- menampilkan alert data berhasil ditambahkan, ganti, dan hapus --}}
               @if ($message = Session::get('success'))

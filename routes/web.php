@@ -175,6 +175,7 @@ Route::get('/kantorkeluardelete/{id}', [KantorKeluarController::class, 'kantorke
 
 // ROUTE LAPORAN PELANGGAN
 Route::get('/laporanpelanggan', [LaporanPelangganController::class, 'laporanpelanggan'])->name('laporanpelanggan');
+Route::get('/laporanpelanggan', [LaporanPelangganController::class, 'searchLaporanPelanggan'])->name('searchLaporanPelanggan');
 Route::get('/laporanpelanggan/export', [LaporanPelangganController::class, 'exportExcel'])->name('laporanpelanggan.export');
 
 // ROUTE KEGIATAN TRANSAKSI
