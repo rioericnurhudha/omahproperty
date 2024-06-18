@@ -239,22 +239,13 @@
     text: '{{ $message }}'
   });
 @endif
-
-
-@if ($errors->any())
+  @if ($message = Session::get('failed'))
   Swal.fire({
     icon: 'error',
-    title: 'Oops!',
-    html: 
-    '<ul>' +
-      @foreach ($errors->all() as $error)
-        '<li>{{ $error }}</li>' +
-      @endforeach
-    '</ul>'
+    title: 'gagal!',
+    text: '{{ $message }}'
   });
 @endif
-</script>
-
 
 @yield('scripts')
 </body>
