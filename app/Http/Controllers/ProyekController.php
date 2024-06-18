@@ -24,8 +24,8 @@ class ProyekController extends Controller
         return view('proyek', compact('data', 'nama_pelanggan', 'id_pelanggan'));
     }
 
-    public function getdaftarpelangganId($Id){
-        $daftarpelanggan = DaftarPelanggan::find($Id);
+    public function getdaftarpelangganId($id){
+        $daftarpelanggan = DaftarPelanggan::find($id);
         if ($daftarpelanggan) {
             return "ID pengguna adalah: $daftarpelanggan->id";
         } else {
