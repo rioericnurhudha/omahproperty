@@ -31,10 +31,17 @@ class UangKeluarController extends Controller
     }
 
     public function uangkeluarinsert(Request $request){
-    $data = $request->all();
-        $data['total_harga'] = $request->jumlah_barang*$request->harga;
+        $validate = $request->validate([
+            'hari_tanggal'   => 'required',
+            'nama_barang' => 'required',
+            'jumlah_barang' => 'required',
+            'harga'  => 'required',
+            'id_proyek'  => 'required',
+            'keterangan'    => 'required',
+        ]);
     
-        UangKeluar::create($data);
+        $validate['total_harga'] = $request->jumlah_barang*$request->harga;
+        UangKeluar::create($validate);
         return redirect()->route('uangkeluar', ['id_proyek' => $request->id_proyek])->with('success', 'Data berhasil ditambahkan!');
     }
 
@@ -44,14 +51,24 @@ class UangKeluarController extends Controller
     }
 
     public function uangkeluarupdate(Request $request, $id){
+        $validate = $request->validate([
+            'hari_tanggal'   => 'required',
+            'nama_barang' => 'required',
+            'jumlah_barang' => 'required',
+            'harga'  => 'required',
+            'id_proyek'  => 'required',
+            'keterangan'    => 'required',
+        ]);
+    
+        $validate['total_harga'] = $request->jumlah_barang*$request->harga;
         $data = UangKeluar::find($id);
-        $data->update($request->all());
-        return redirect()->route('uangkeluar', ['id' => $data->id_uang_masuk])->with('success', 'Data berhasil ditambahkan!');
+        $data->update($validate);
+        return redirect()->route('uangkeluar', ['id' => $data->id_proyek])->with('success', 'Data berhasil diupdate!');
     }
 
     public function uangkeluardelete($id){
         $data = UangKeluar::find($id);
         $data->delete();
-        return redirect()->route('uangkeluar', ['id' => $data->id_uang_masuk])->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->route('uangkeluar', ['id_proyek' => $data->id_proyek])->with('success', 'Data berhasil dihapus!');
     }
 }

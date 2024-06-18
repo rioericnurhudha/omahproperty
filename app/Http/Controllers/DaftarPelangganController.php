@@ -37,8 +37,14 @@ class DaftarPelangganController extends Controller
         return view('daftarpelanggantambah');
     }
     public function daftarpelangganinsert(Request $request){
-        // dd($request);
-        DaftarPelanggan::create($request->all());
+        $validate = $request->validate([
+            'nama_pelanggan'   => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
+            
+        ]);
+        DaftarPelanggan::create($validate);
+
         return redirect()->route('daftarpelanggan')->with('success', 'data berhasil ditambahkan!');
     }
 
@@ -48,8 +54,14 @@ class DaftarPelangganController extends Controller
     }
 
     public function daftarpelangganupdate(Request $request, $id){
+        $validate = $request->validate([
+            'nama_pelanggan'   => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
+            
+        ]);
         $data = DaftarPelanggan::find($id);
-        $data->update($request->all());
+        $data->update($validate);
         return redirect()->route('daftarpelanggan')->with('success', 'Data berhasil diperbarui!');
     }
 

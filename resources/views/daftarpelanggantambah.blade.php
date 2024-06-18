@@ -22,15 +22,24 @@
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Nama Pelanggan</label>
                             <input type="text" name="nama_pelanggan" class="form-control text-white" id="exampleFormControlInput1" placeholder="">
-                        </div>
+                            @error('nama_pelanggan')
+                            <small class="text-danger text-bold">{{ $message }}</small>
+                        @enderror
+                          </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">No.Hp</label>
                             <input type="number" name="no_hp" class="form-control " id="exampleFormControlInput1" placeholder="">
+                            @error('no_hp')
+                            <small class="text-danger text-bold">{{ $message }}</small>
+                        @enderror
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Alamat</label>
                             <input type="text" name="alamat" class="form-control" id="exampleFormControlInput1" placeholder="">
-                        </div>
+                            @error('alamat')
+                            <small class="text-danger text-bold">{{ $message }}</small>
+                        @enderror
+                          </div>
                         <a href="/daftarpelanggan" class="btn btn-primary">kembali</a>
                         <button type="submit" class="btn btn-primary">submit</button>
                         </form>

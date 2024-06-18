@@ -242,7 +242,6 @@
         });
     </script>
 @endif
-@yield('content')
 
 @yield('scripts')
 </body>

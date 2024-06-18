@@ -74,13 +74,4 @@
     </div>
 
 @endsection
-@if ($message = Session::get('success'))
-<script>
-    Swal.fire('{{$message}}');
-</script>
-@endif
-@if ($message = Session::get('failed'))
-<script>
-    Swal.fire('{{$message}}');
-</script>
-@endif
+

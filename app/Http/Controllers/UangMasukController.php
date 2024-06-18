@@ -26,14 +26,14 @@ class UangMasukController extends Controller
     }
 
     public function uangmasukinsert(Request $request){
-        $validatedData = $request->validate([
+        $validate = $request->validate([
             'hari_tanggal'      => 'required',
             'jenis_pembayaran'  => 'required',
+            'id_proyek'  => 'required',
             'jumlah_pembayaran' => 'required'
         ]);
     
-        $validatedData['id_proyek'] = $request->id_proyek;
-        UangMasuk::create($validatedData);
+        UangMasuk::create($validate);
     
         // Update status proyek setelah insert uang masuk
         $this->updateProyekStatus($request->id_proyek);
@@ -47,8 +47,14 @@ class UangMasukController extends Controller
     }
 
     public function uangmasukupdate(Request $request, $id){
+        $validate = $request->validate([
+            'hari_tanggal'      => 'required',
+            'jenis_pembayaran'  => 'required',
+            'id_proyek'  => 'required',
+            'jumlah_pembayaran' => 'required'
+        ]);
         $data = UangMasuk::find($id);
-        $data->update($request->all());
+        $data->update($validate);
 
         // Update status proyek setelah update uang masuk
         $this->updateProyekStatus($data->id_proyek);

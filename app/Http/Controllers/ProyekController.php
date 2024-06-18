@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
+use RealRashid\SweetAlert\Facades\Alert;
+
 class ProyekController extends Controller
 {
     public function jumlahProyek(){
@@ -39,35 +41,43 @@ class ProyekController extends Controller
         return view('proyektambah', compact('data', 'nama_pelanggan', 'id_pelanggan'));
     }
 
-    public function proyekinsert(Request $request){
-        $validator = Validator::make($request->all(),[
+    
+    public function proyekinsert(Request $request)
+    {
+        $validate = $request->validate([
             'type_proyek'   => 'required',
             'lokasi_proyek' => 'required',
             'gambar_proyek' => 'required|mimes:png,jpg,jpeg|max:2048',
             'harga_proyek'  => 'required',
-            
+            'id_pelanggan'  => 'required',
             'keterangan'    => 'required',
         ]);
-
-        if($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-        $proyek = Proyek::create($request->all());
-        $totalUangMasuk = UangMasuk::where('id_proyek', $request->id)->sum('jumlah_pembayaran');
+    
+        $proyek = Proyek::create($validate);
+    
+        // Calculate total payments for the project
+        $totalUangMasuk = UangMasuk::where('id_proyek', $proyek->id)->sum('jumlah_pembayaran');
+    
+        // Determine project status based on payments
         if ($totalUangMasuk >= $proyek->harga_proyek) {
             $proyek->status_proyek = 'lunas';
         } else {
             $proyek->status_proyek = 'belum lunas';
         }
-
-        if ($request->hasFile('gambar_proyek')){
-            $request->file('gambar_proyek')->move('images/', $request->file('gambar_proyek')->getClientOriginalName());
-            $proyek->gambar_proyek = $request->file('gambar_proyek')->getClientOriginalName();
+    
+        // Upload and save project image if exists
+        if ($request->hasFile('gambar_proyek')) {
+            $imageName = time() . '.' . $request->file('gambar_proyek')->extension();
+            $request->file('gambar_proyek')->move(public_path('images'), $imageName);
+            $proyek->gambar_proyek = $imageName;
             $proyek->save();
         }
-
-        return redirect()->route('proyek', ['id' => $proyek->id_pelanggan])->with(['success' => 'Data Berhasil Disimpan!']);
+    
+        // Show success alert and redirect with success message
+    
+        return redirect()->route('proyek', ['id' => $proyek->id_pelanggan])->with('success', 'Data berhasil ditambahkan!');
     }
-
+    
     public function proyektampil($id){
         $data = Proyek::find($id);
         return view('proyektampil', compact('data'));
@@ -79,8 +89,16 @@ class ProyekController extends Controller
     }
 
     public function proyekupdate(Request $request, $id){
+        $validate = $request->validate([
+            'type_proyek'   => 'required',
+            'lokasi_proyek' => 'required',
+            'gambar_proyek' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'harga_proyek'  => 'required',
+            'id_pelanggan'  => 'required',
+            'keterangan'    => 'required',
+        ]);
         $data = Proyek::find($id);
-        $data->update($request->all());
+        $data->update($validate);
 
         // Hitung total uang masuk untuk proyek ini
         $totalUangMasuk = UangMasuk::where('id_proyek', $id)->sum('jumlah_pembayaran');

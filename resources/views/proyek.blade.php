@@ -22,9 +22,10 @@
             {{-- menampilkan alert data berhasil ditambahkan, ganti, dan hapus --}}
             @if ($message = Session::get('success'))
             <div class="alert alert-success" role="alert">
-                {{$message}}
+                {{ $message }}
             </div>
-            @endif
+        @endif
+
 
             <table class="table">
                 <thead>
