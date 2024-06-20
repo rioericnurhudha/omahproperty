@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DirekturController;
 use App\Http\Controllers\DaftarPelangganController;
+use App\Http\Controllers\HutangController;
 use App\Http\Controllers\UangMasukController;
 use App\Http\Controllers\UangKeluarController;
 use App\Http\Controllers\ProyekController;
@@ -42,6 +43,8 @@ Route::get('/direkturtampil/{id}', [DirekturController::class, 'direkturtampil']
 Route::post('/direkturupdate/{id}', [DirekturController::class, 'direkturupdate'])->name('direkturupdate');
 Route::get('/direkturdelete/{id}', [DirekturController::class, 'direkturdelete'])->name('direkturdelete');
 
+
+Route::get('/hutang', [HutangController::class, 'daftarHutang'])->name('hutang');
 
 Route::get('/dashboard', [DaftarPelangganController::class, 'jumlahPelanggan'])->name('dashboard');
 

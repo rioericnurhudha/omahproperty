@@ -136,7 +136,7 @@
         </li>
 
           <li class="nav-item">
-              <a href="/hutang" class="nav-link">
+              <a href="{{ route('hutang') }}" class="nav-link">
                 <i class="nav-icon fas fa-receipt"></i>
                 <p>
                     Hutang Piutang
